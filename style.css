@@ -2,6 +2,28 @@ body {
   background-color: cornflowerblue;
 }
 
-.test-button {
-  background-color: white;
+.grid-container {
+  background-color: green;
+  display: grid;
+  /* width: 95vw;
+  height: 80vh; */
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  justify-items: center;
+  gap: 2px;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  text-align: center;
+}
+
+.a {
+  background-color: blue;
+}
+
+.b {
+  background-color: red;
 }
