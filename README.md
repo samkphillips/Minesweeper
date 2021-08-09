@@ -16,6 +16,8 @@ This will be an implementation of the classic game Minesweeper made in pure HTML
 
 It is being made for Project 1 in the GA SEI.
 
+Progress is being tracked and planning done on [Trello](https://trello.com/b/TfPBJzEF/minesweeper-for-ga)
+
 ---
 
 **_Technologies Used_**
