@@ -47,6 +47,7 @@ class Cell {
   reveal() {
     //if not a mine, reveal number
     //if it is a mine, game over
+    //does nothing if trying to reveal a flagged cell
   }
 
   markFlag() {
@@ -74,19 +75,18 @@ class Grid {
       }
     }
 
-    //hardcoding some mines for now, add a loop later
-    this.cells[1][1].isMine = true
-    this.cells[1][1].cellElement.innerHTML = `<p>MINE</p>`
-    this.cells[5][7].isMine = true
-    this.cells[5][7].cellElement.innerHTML = `<p>MINE</p>`
-    this.cells[6][8].isMine = true
-    this.cells[6][8].cellElement.innerHTML = `<p>MINE</p>`
-    this.cells[6][0].isMine = true
-    this.cells[6][0].cellElement.innerHTML = `<p>MINE</p>`
-    this.cells[7][0].isMine = true
-    this.cells[7][0].cellElement.innerHTML = `<p>MINE</p>`
-    this.cells[7][1].isMine = true
-    this.cells[7][1].cellElement.innerHTML = `<p>MINE</p>`
+    //loop to add some mines. Should add a way to tweak this later on, if difficulty is added
+    for (let i = 0; i < 10; i++) {
+      let newMine = this.cells[randInt(0, this.width)][randInt(0, this.height)]
+
+      while (newMine.isMine) {
+        //this is dumb but effective
+        newMine = this.cells[randInt(0, this.width)][randInt(0, this.height)]
+      }
+
+      newMine.isMine = true
+      newMine.cellElement.innerHTML = `<p>MINE</p>`
+    }
 
     this.updateGridCount()
   }
@@ -98,6 +98,8 @@ class Grid {
     //XOX
     //XXX
     let neighbors = []
+
+    //all these dumb conditionals ignore edges of grid
     if (xCoord > 0) {
       if (yCoord > 0) {
         neighbors.push(this.cells[xCoord - 1][yCoord - 1]) //top left
@@ -152,3 +154,9 @@ class Grid {
 //let testArr = [new Cell('A'), new Cell('B'), new Cell('C')]
 
 let g = new Grid()
+
+//some helper functions as a kindess to myself
+function randInt(lower, upper) {
+  //returns random integer between lower and upper. includes lower, excludes upper
+  return Math.floor(Math.random() * (upper - lower) + lower)
+}
