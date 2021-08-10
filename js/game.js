@@ -24,14 +24,24 @@ class Cell {
     this.isRevealed = false
     this.isFlagged = false
 
+    this.minesNearby = 0
+
     this.location = { x: xCoord, y: yCoord }
 
     //left click listener
     this.cellElement.addEventListener('click', (e) => {
-      console.log(
-        `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
-      )
-      this.cellElement.className = 'cell a'
+      // console.log(
+      //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
+      // )
+      //this.cellElement.className = 'cell a'
+
+      //crude game logic just to check
+      if (this.isMine) {
+        this.cellElement.innerHTML = `<p>MINE</p>`
+      } else {
+        this.cellElement.style.backgroundColor = 'white'
+        this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
+      }
     })
 
     //right click listener
@@ -85,7 +95,7 @@ class Grid {
       }
 
       newMine.isMine = true
-      newMine.cellElement.innerHTML = `<p>MINE</p>`
+      //newMine.cellElement.innerHTML = `<p>MINE</p>`
     }
 
     this.updateGridCount()
@@ -135,7 +145,7 @@ class Grid {
     this.cells.forEach((r) => {
       r.forEach((c) => {
         if (c.isMine) {
-          c.cellElement.innerHTML = `<p>MINE</p>`
+          //c.cellElement.innerHTML = `<p>MINE</p>`
         } else {
           let neighbors = this.getNeighbors(c.location.x, c.location.y)
           let mineCount = 0
@@ -144,7 +154,8 @@ class Grid {
               mineCount++
             }
           })
-          c.cellElement.innerHTML = `<p>${mineCount}</p>`
+          //c.cellElement.innerHTML = `<p>${mineCount}</p>`
+          c.minesNearby = mineCount
         }
       })
     })
