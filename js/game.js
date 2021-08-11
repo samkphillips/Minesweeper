@@ -1,6 +1,7 @@
 //
 const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
+const RESETBUTTON = document.querySelector('.reset-button')
 
 let gameActive = false
 
@@ -209,6 +210,14 @@ let g = new Grid()
 // --initialize a new Grid object.
 // Might even be able to roll difficulty options straight into that reset function.
 // Should double check how garbage collection works in JS, don't wanna have a memory leak
+
+const gameReset = function () {
+  GRIDCONTAINER.innerHTML = ''
+  g = new Grid()
+  console.log('Reset')
+}
+
+RESETBUTTON.addEventListener('click', gameReset)
 
 //some helper functions as a kindess to myself
 function randInt(lower, upper) {
