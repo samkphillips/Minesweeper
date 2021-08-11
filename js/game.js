@@ -2,6 +2,8 @@
 const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
 
+let gameActive = false
+
 class Cell {
   constructor(id, xCoord, yCoord, parent) {
     this.id = id
@@ -27,7 +29,9 @@ class Cell {
       // )
       //this.cellElement.className = 'cell a'
 
-      this.reveal()
+      if (gameActive) {
+        this.reveal()
+      }
     })
 
     //right click listener
@@ -36,7 +40,9 @@ class Cell {
       // console.log(
       //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
       // )
-      this.markFlag()
+      if (gameActive) {
+        this.markFlag()
+      }
     })
   }
 
@@ -55,17 +61,26 @@ class Cell {
     if (this.isMine) {
       this.cellElement.innerHTML = `<p>MINE</p>`
     } else {
+      this.isRevealed = true
       this.cellElement.style.backgroundColor = 'white'
       this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
     }
 
-    //this.parent.checkWin()
+    this.parent.checkWin()
   }
 
   markFlag() {
     //marks cell with flag
+    this.isFlagged = true
     this.cellElement.className = 'cell b'
     this.cellElement.innerHTML = `<p>flag</p>`
+  }
+
+  unMarkFlag() {
+    //removes flag
+    this.isFlagged = false
+    this.cellElement.className = 'cell'
+    this.cellElement.innerHTML = `<p> </p>`
   }
 }
 
@@ -103,6 +118,8 @@ class Grid {
     }
 
     this.updateGridCount()
+
+    gameActive = true
   }
 
   getNeighbors(xCoord, yCoord) {
@@ -168,6 +185,19 @@ class Grid {
   checkWin() {
     //checks for a win!
     //loops through all cells and confirms all non-mine cells are revealed
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        let c = this.cells[x][y]
+
+        if (!c.isRevealed && !c.isMine) {
+          return false
+        }
+      }
+    }
+
+    console.log('You won!')
+    gameActive = false
+    return true
   }
 }
 
