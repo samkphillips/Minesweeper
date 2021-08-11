@@ -3,14 +3,6 @@ const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
 
 class Cell {
-  //fields:
-  /*
-  -cellElement: contains reference to html element this corresponds to
-  -isMine: bool
-  -isRevealed: bool
-  -location: object with two fields: {x: x coord, y: y coord}
-  --so the x coord would be referenced with like, cell.location.x
-  */
   constructor(id, xCoord, yCoord, parent) {
     this.id = id
     this.parent = parent
@@ -35,22 +27,16 @@ class Cell {
       // )
       //this.cellElement.className = 'cell a'
 
-      //crude game logic just to check
-      if (this.isMine) {
-        this.cellElement.innerHTML = `<p>MINE</p>`
-      } else {
-        this.cellElement.style.backgroundColor = 'white'
-        this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
-      }
+      this.reveal()
     })
 
     //right click listener
     this.cellElement.addEventListener('contextmenu', (e) => {
       e.preventDefault()
-      console.log(
-        `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
-      )
-      this.cellElement.className = 'cell b'
+      // console.log(
+      //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
+      // )
+      this.markFlag()
     })
   }
 
@@ -58,10 +44,28 @@ class Cell {
     //if not a mine, reveal number
     //if it is a mine, game over
     //does nothing if trying to reveal a flagged cell
+
+    // if minesNearby === 0, we need to flood-reveal.
+    // I guess that might need to live in the parent Grid,
+    // so that this can just call it and not have to worry
+    // about excessively recurring or anything??
+    // Buncha different ways I could write that.
+
+    //crude game logic just to check
+    if (this.isMine) {
+      this.cellElement.innerHTML = `<p>MINE</p>`
+    } else {
+      this.cellElement.style.backgroundColor = 'white'
+      this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
+    }
+
+    //this.parent.checkWin()
   }
 
   markFlag() {
     //marks cell with flag
+    this.cellElement.className = 'cell b'
+    this.cellElement.innerHTML = `<p>flag</p>`
   }
 }
 
@@ -71,7 +75,7 @@ class Grid {
     this.width = 8
     this.height = 10
 
-    //initialize an array
+    //initialize an array, this feels hacky but works??? So whatever
     this.cells = [...Array(this.width)].map(() => Array(this.height))
 
     let cellCount = 0
@@ -160,11 +164,21 @@ class Grid {
       })
     })
   }
+
+  checkWin() {
+    //checks for a win!
+    //loops through all cells and confirms all non-mine cells are revealed
+  }
 }
 
-//let testArr = [new Cell('A'), new Cell('B'), new Cell('C')]
-
 let g = new Grid()
+
+// I think all I need to add the ability to reset is to:
+// --dereference that Grid
+// --clear GRIDCONTAINER
+// --initialize a new Grid object.
+// Might even be able to roll difficulty options straight into that reset function.
+// Should double check how garbage collection works in JS, don't wanna have a memory leak
 
 //some helper functions as a kindess to myself
 function randInt(lower, upper) {
