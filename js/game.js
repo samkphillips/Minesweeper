@@ -31,7 +31,9 @@ class Cell {
       //this.cellElement.className = 'cell a'
 
       if (gameActive) {
-        this.reveal()
+        if (!this.isFlagged) {
+          this.reveal()
+        }
       }
     })
 
@@ -42,7 +44,11 @@ class Cell {
       //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
       // )
       if (gameActive) {
-        this.markFlag()
+        if (this.isFlagged) {
+          this.unMarkFlag()
+        } else {
+          this.markFlag()
+        }
       }
     })
   }
