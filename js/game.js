@@ -60,14 +60,15 @@ class Cell {
 
     //crude game logic just to check
     if (this.isMine) {
+      gameActive = false
+      console.log('You lost!')
       this.cellElement.innerHTML = `<p>MINE</p>`
     } else {
       this.isRevealed = true
       this.cellElement.style.backgroundColor = 'white'
       this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
+      this.parent.checkWin()
     }
-
-    this.parent.checkWin()
   }
 
   markFlag() {
