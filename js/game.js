@@ -56,7 +56,6 @@ class Cell {
   reveal() {
     //if not a mine, reveal number
     //if it is a mine, game over
-    //does nothing if trying to reveal a flagged cell
 
     // if minesNearby === 0, we need to flood-reveal.
     // I guess that might need to live in the parent Grid,
@@ -66,14 +65,16 @@ class Cell {
 
     //crude game logic just to check
     if (this.isMine) {
-      gameActive = false
-      console.log('You lost!')
+      this.parent.lose()
       this.cellElement.innerHTML = `<p>MINE</p>`
     } else {
       this.isRevealed = true
       this.cellElement.style.backgroundColor = 'white'
       this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
-      this.parent.checkWin()
+
+      if (this.parent.checkWin()) {
+        this.parent.win()
+      }
     }
   }
 
@@ -132,10 +133,6 @@ class Grid {
 
   getNeighbors(xCoord, yCoord) {
     //returns a list of all neighbors to a given cell location, but NOT the cell mentioned
-    //i.e., the below pattern, it gives the Xs but not the O
-    //XXX
-    //XOX
-    //XXX
     let neighbors = []
 
     //all these dumb conditionals ignore edges of grid
@@ -203,21 +200,26 @@ class Grid {
       }
     }
 
+    return true
+  }
+
+  win() {
+    //display a win, end game, etc.
     console.log('You won!')
     gameActive = false
-    return true
+  }
+
+  lose() {
+    //display a loss, end game, etc.
+    console.log('You lost!')
+    gameActive = false
   }
 }
 
+//make the grid! Gets the ball rolling.
 let g = new Grid()
 
-// I think all I need to add the ability to reset is to:
-// --dereference that Grid
-// --clear GRIDCONTAINER
-// --initialize a new Grid object.
-// Might even be able to roll difficulty options straight into that reset function.
-// Should double check how garbage collection works in JS, don't wanna have a memory leak
-
+//reset stuff
 const gameReset = function () {
   GRIDCONTAINER.innerHTML = ''
   g = new Grid()
