@@ -99,7 +99,6 @@ class Grid {
     //size grid container
     GRIDCONTAINER.style.width = `${this.width * sizeOfCells}px`
     GRIDCONTAINER.style.height = `${this.height * sizeOfCells}px`
-    //build grid strings:
     GRIDCONTAINER.style.gridTemplateColumns = `repeat(${this.width}, 1fr)`
     GRIDCONTAINER.style.gridTemplateRows = `repeat(${this.height}, 1fr)`
 
@@ -220,14 +219,15 @@ class Grid {
 }
 
 //make the grid! Gets the ball rolling.
-let g = new Grid(8, 10, 10) //easy
-//let g = new Grid(18, 14, 40) //medium
+//let g = new Grid(8, 10, 10) //easy
+let g = new Grid(18, 14, 40) //medium
 //let g = new Grid(24, 20, 99) //hard
+//let g = new Grid(200, 180, 8000) //hahahaha
 
 //reset stuff
 const gameReset = function () {
   GRIDCONTAINER.innerHTML = ''
-  g = new Grid(8, 10, 10)
+  g = new Grid(18, 14, 40)
   console.log('Reset')
 }
 

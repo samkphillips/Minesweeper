@@ -5,17 +5,27 @@
 
 body {
   background-color: cornflowerblue;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(50px, auto) 1fr minmax(50px, auto);
+  grid-template-rows: minmax(50px, 1fr) 1fr minmax(50px, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.game {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  background-color: darkblue;
 }
 
 .grid-container {
   background-color: green;
   display: grid;
-  /* width: 95vw;
-  height: 80vh; */
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
   justify-items: center;
-  /* gap: 2px; */
 }
 
 .cell {
