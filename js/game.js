@@ -96,17 +96,22 @@ class Cell {
 }
 
 class Grid {
-  constructor() {
+  constructor(w, h, mines) {
     //maybe add board size variation later. for now:
-    this.width = 8
-    this.height = 10
+    this.width = w
+    this.height = h
 
     //size grid container
     GRIDCONTAINER.style.width = `${this.width * sizeOfCells}px`
     GRIDCONTAINER.style.height = `${this.height * sizeOfCells}px`
+    //build grid strings:
+    GRIDCONTAINER.style.gridTemplateColumns = `repeat(${this.width}, 1fr)`
+    GRIDCONTAINER.style.gridTemplateRows = `repeat(${this.height}, 1fr)`
 
     //initialize an array, this feels hacky but works??? So whatever
     this.cells = [...Array(this.width)].map(() => Array(this.height))
+
+    console.log(this.cells)
 
     let cellCount = 0
 
@@ -119,8 +124,10 @@ class Grid {
       }
     }
 
+    console.log(this.cells)
+
     //loop to add some mines. Should add a way to tweak this later on, if difficulty is added
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < mines; i++) {
       let newMine = this.cells[randInt(0, this.width)][randInt(0, this.height)]
 
       while (newMine.isMine) {
@@ -174,6 +181,8 @@ class Grid {
 
   updateGridCount() {
     //loops through all cells, updates count of neighbors as needed
+    //console.log(this.cells)
+
     this.cells.forEach((r) => {
       r.forEach((c) => {
         if (c.isMine) {
@@ -223,12 +232,14 @@ class Grid {
 }
 
 //make the grid! Gets the ball rolling.
-let g = new Grid()
+let g = new Grid(8, 10, 10) //easy
+//let g = new Grid(18, 14, 40) //medium
+//let g = new Grid(24, 20, 99) //hard
 
 //reset stuff
 const gameReset = function () {
   GRIDCONTAINER.innerHTML = ''
-  g = new Grid()
+  g = new Grid(8, 10, 10)
   console.log('Reset')
 }
 
