@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background-color: cornflowerblue;
 }
@@ -10,12 +15,12 @@ body {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
   justify-items: center;
-  gap: 2px;
+  /* gap: 2px; */
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-color: gray;
   text-align: center;
 }

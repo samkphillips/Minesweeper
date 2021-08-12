@@ -3,6 +3,8 @@ const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
 const RESETBUTTON = document.querySelector('.reset-button')
 
+const sizeOfCells = 30 //size in pixels of whatever image I use for the cell sprites
+
 let gameActive = false
 
 class Cell {
@@ -98,6 +100,10 @@ class Grid {
     //maybe add board size variation later. for now:
     this.width = 8
     this.height = 10
+
+    //size grid container
+    GRIDCONTAINER.style.width = `${this.width * sizeOfCells}px`
+    GRIDCONTAINER.style.height = `${this.height * sizeOfCells}px`
 
     //initialize an array, this feels hacky but works??? So whatever
     this.cells = [...Array(this.width)].map(() => Array(this.height))
