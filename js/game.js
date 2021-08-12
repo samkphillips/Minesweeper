@@ -27,11 +27,6 @@ class Cell {
 
     //left click listener
     this.cellElement.addEventListener('click', (e) => {
-      // console.log(
-      //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
-      // )
-      //this.cellElement.className = 'cell a'
-
       if (gameActive) {
         if (!this.isFlagged) {
           this.reveal()
@@ -42,14 +37,14 @@ class Cell {
     //right click listener
     this.cellElement.addEventListener('contextmenu', (e) => {
       e.preventDefault()
-      // console.log(
-      //   `My id is ${this.id} and I am at ${this.location.x}, ${this.location.y}`
-      // )
+
       if (gameActive) {
-        if (this.isFlagged) {
-          this.unMarkFlag()
-        } else {
-          this.markFlag()
+        if (!this.isRevealed) {
+          if (this.isFlagged) {
+            this.unMarkFlag()
+          } else {
+            this.markFlag()
+          }
         }
       }
     })
@@ -111,8 +106,6 @@ class Grid {
     //initialize an array, this feels hacky but works??? So whatever
     this.cells = [...Array(this.width)].map(() => Array(this.height))
 
-    console.log(this.cells)
-
     let cellCount = 0
 
     for (let y = 0; y < this.height; y++) {
@@ -124,9 +117,7 @@ class Grid {
       }
     }
 
-    console.log(this.cells)
-
-    //loop to add some mines. Should add a way to tweak this later on, if difficulty is added
+    //loop to add some mines
     for (let i = 0; i < mines; i++) {
       let newMine = this.cells[randInt(0, this.width)][randInt(0, this.height)]
 
@@ -136,7 +127,6 @@ class Grid {
       }
 
       newMine.isMine = true
-      //newMine.cellElement.innerHTML = `<p>MINE</p>`
     }
 
     this.updateGridCount()
@@ -181,8 +171,6 @@ class Grid {
 
   updateGridCount() {
     //loops through all cells, updates count of neighbors as needed
-    //console.log(this.cells)
-
     this.cells.forEach((r) => {
       r.forEach((c) => {
         if (c.isMine) {
