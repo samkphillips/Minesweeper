@@ -113,7 +113,6 @@ class Cell {
 
 class Grid {
   constructor(w, h, mines) {
-    //maybe add board size variation later. for now:
     this.width = w
     this.height = h
 
@@ -306,7 +305,7 @@ const gameReset = function () {
       g = new Grid(24, 20, 99)
       break
     case 'stress-test':
-      g = new Grid(200, 180, 8000)
+      g = new Grid(80, 68, 1200)
       break
     default:
       g = new Grid(10, 8, 10)
@@ -315,7 +314,7 @@ const gameReset = function () {
 
 RESETBUTTON.addEventListener('click', gameReset)
 
-//some helper functions as a kindess to myself
+//small helper function as a kindess to myself
 function randInt(lower, upper) {
   //returns random integer between lower and upper. includes lower, excludes upper
   return Math.floor(Math.random() * (upper - lower) + lower)
