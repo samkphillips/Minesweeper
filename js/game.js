@@ -14,7 +14,7 @@ class Cell {
 
     this.cellElement = document.createElement('div')
     this.cellElement.className = 'cell'
-    this.cellElement.innerHTML = '<p> </p>'
+    // this.cellElement.innerHTML = '<p> </p>'
 
     this.isMine = false
     this.isRevealed = false
@@ -62,7 +62,7 @@ class Cell {
     //crude game logic just to check
     if (this.isMine) {
       this.parent.lose()
-      this.cellElement.innerHTML = `<p>MINE</p>`
+      this.cellElement.className = 'cell killer-mine'
     } else {
       this.isRevealed = true
       this.cellElement.className = `cell reveal-${this.minesNearby}`
@@ -209,6 +209,17 @@ class Grid {
 
   lose() {
     //display a loss, end game, etc.
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        let c = this.cells[x][y]
+        if (c.isFlagged && !c.isMine) {
+          c.cellElement.className = 'cell incorrect-flag'
+        } else if (!c.isFlagged && c.isMine) {
+          c.cellElement.className = 'cell mine'
+        }
+      }
+    }
+
     console.log('You lost!')
     gameActive = false
   }

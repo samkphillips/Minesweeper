@@ -49,6 +49,18 @@ body {
   background-image: url('./assets/minesweeper_flagged.png');
 }
 
+.incorrect-flag {
+  background-image: url('./assets/minesweeper_incorrect_flag.png');
+}
+
+.mine {
+  background-image: url('./assets/minesweeper_mine.png');
+}
+
+.killer-mine {
+  background-image: url('./assets/minesweeper_killer_mine.png');
+}
+
 .reveal-0 {
   background-image: url('./assets/minesweeper_empty.png');
 }
