@@ -1,20 +1,20 @@
 # Minesweeper
 
-## Date: 8/9/21
+## Date: 8/13/21
 
 #
 
 ### By: Sam Phillips
 
-[Website](ReallyGottaMakeOne) | [GitHub](https://github.com/samkphillips) | [LinkedIn](https://www.linkedin.com/in/sam-phillips-8ba677168/)
+[GitHub](https://github.com/samkphillips) | [LinkedIn](https://www.linkedin.com/in/sam-phillips-8ba677168/)
 
 #
 
 **_Description_**
 
-This will be an implementation of the classic game Minesweeper made in pure HTML, CSS, and JavaScript.
+A simple and clean remake of the classic game of Minesweeper. Styled after the original but with an updated color scheme.
 
-It is being made for Project 1 in the GA SEI.
+It was originally made for Project 1 in the GA SEI.
 
 Progress is being tracked and planning done on [Trello](https://trello.com/b/TfPBJzEF/minesweeper-for-ga)
 
@@ -27,25 +27,39 @@ Progress is being tracked and planning done on [Trello](https://trello.com/b/TfP
 
 ---
 
-**_Getting Started_**
+**_Play!_**
 
-Apparently we're gonna deploy this somewhere, stay tuned.
+You can play the most recent version, deployed using Surge, at the link below:
+[Play Minesweeper](http://retrofutureminesweep.surge.sh/)
 
 ---
 
 **_Screenshots_**
 
-#### Someday soon
+#### The classic game!
+
+![Screenshot1](./screenshots/minesweep_screenshot_1.png)
+
+#### Shows you what went wrong ~~when~~ if you lose
+
+![Screenshot2](./screenshots/minesweep_screenshot_2.png)
+
+#### Multiple difficulty options
+
+![Screenshot3](./screenshots/minesweep_screenshot_3.png)
 
 ---
 
 **_To Do_**
 
-- [x] ~~Make the ReadMe~~
-- [ ] Do the project
+- [x] MVP!
+- [ ] Add clear-around input
+- [ ] Optional sound effects
 
 ---
 
 **_Credits_**
 
-Soon!
+[Coolors Color Schemes](https://coolors.co/)
+
+[CSS Gradient Background](https://cssgradient.io/)
