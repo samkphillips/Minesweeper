@@ -1,3 +1,5 @@
+![banner](./screenshots/banner.png)
+
 # Minesweeper
 
 ## Date: 8/13/21
