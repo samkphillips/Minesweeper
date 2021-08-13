@@ -29,7 +29,13 @@ class Cell {
     this.cellElement.addEventListener('click', (e) => {
       if (gameActive) {
         if (!this.isFlagged) {
-          this.reveal()
+          if (!this.isRevealed) {
+            this.reveal()
+          } else {
+            if (e.shiftKey) {
+              this.revealAround()
+            }
+          }
         }
       }
     })
@@ -67,6 +73,26 @@ class Cell {
       if (this.parent.checkWin()) {
         this.parent.win()
       }
+    }
+  }
+
+  revealAround() {
+    //reveals all neighboring cells if correct number of flags neighboring
+    let neighbors = this.parent.getNeighbors(this.location.x, this.location.y)
+    let neighboringFlags = 0
+
+    neighbors.forEach((n) => {
+      if (n.isFlagged) {
+        neighboringFlags++
+      }
+    })
+
+    if (neighboringFlags === this.minesNearby) {
+      neighbors.forEach((n) => {
+        if (!n.isFlagged) {
+          n.reveal()
+        }
+      })
     }
   }
 
@@ -201,12 +227,12 @@ class Grid {
   }
 
   floodReveal(initialCell) {
+    //flood fills all zero-neighbor cells and all neighboring cells
+    //saves a ton of clicking :P
     let toFlood = [initialCell]
 
     while (toFlood.length > 0) {
       let c = toFlood.shift()
-
-      console.log(c)
 
       let cNeighbors = this.getNeighbors(c.location.x, c.location.y)
 

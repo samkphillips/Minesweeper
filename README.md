@@ -53,8 +53,10 @@ You can play the most recent version, deployed using Surge, at the link below:
 **_To Do_**
 
 - [x] MVP!
-- [ ] Add clear-around input
+- [x] Add clear-around input
 - [ ] Optional sound effects
+- [ ] Adjust mine creation algorithm to prevent first clicked cell from being a mine to prevent false starts
+- [ ] Adjust mine creation algorithm to prevent guesses in 50/50 split situations
 
 ---
 
