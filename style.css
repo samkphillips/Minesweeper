@@ -4,6 +4,10 @@
 }
 
 body {
+  display: grid;
+  grid-template-columns: 1fr 400px 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
   background: rgb(11, 49, 66);
   background: linear-gradient(
     330deg,
@@ -16,4 +20,32 @@ body {
   width: 100vw;
   height: 100vh;
   font-family: Arial;
+  color: #62b2cf;
+}
+
+.content {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding: 50px;
+  background-color: #0b3142;
+  border: solid 2px;
+  border-color: #0f5257 #92869b #92869b #0f5257;
+}
+
+h1 {
+  color: #ffc145;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  margin: 30px auto;
+  padding: 3px;
+  background-color: #92869b;
+  border: solid 2px;
+  border-color: #b9e6ff #0b3142 #0b3142 #b9e6ff;
+}
+
+a:hover {
+  color: #b9e6ff;
 }
