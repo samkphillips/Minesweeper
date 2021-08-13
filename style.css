@@ -23,7 +23,7 @@ body {
   font-family: Arial;
 }
 
-.delete-me {
+.title {
   color: white;
 }
 
@@ -35,11 +35,43 @@ body {
 
 .hud {
   background-color: #92869b;
-  padding: 0;
-  width: calc(100% - 4px);
+  padding: 5px;
+  width: calc(100% - 14px);
   height: 56px;
   border: solid 2px;
   border-color: #b9e6ff #0b3142 #0b3142 #b9e6ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  margin: 0;
+  padding: 0;
+}
+
+.mines-display {
+  display: inline;
+  color: white;
+}
+
+.difficulty-select {
+  display: block;
+  margin: 10px 0 0 0;
+}
+
+.reset-button {
+  display: block;
+  float: right;
+  margin: 3px;
 }
 
 .grid-container {

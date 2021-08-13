@@ -3,6 +3,7 @@ const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
 const RESETBUTTON = document.querySelector('.reset-button')
 const DIFFICULTYSELECT = document.querySelector('.difficulty-select')
+const MINESDISPLAY = document.querySelector('.mines-display')
 
 const sizeOfCells = 30 //size in pixels of image used for the cell sprites
 
@@ -77,12 +78,14 @@ class Cell {
     //marks cell with flag
     this.isFlagged = true
     this.cellElement.className = 'cell flagged'
+    this.parent.updateFlagCount()
   }
 
   unMarkFlag() {
     //removes flag
     this.isFlagged = false
     this.cellElement.className = 'cell'
+    this.parent.updateFlagCount()
   }
 }
 
@@ -113,6 +116,8 @@ class Grid {
     }
 
     //loop to add some mines
+    this.startingMines = mines
+
     for (let i = 0; i < mines; i++) {
       let newMine = this.cells[randInt(0, this.width)][randInt(0, this.height)]
 
@@ -125,6 +130,7 @@ class Grid {
     }
 
     this.updateGridCount()
+    this.updateFlagCount()
 
     gameActive = true
   }
@@ -185,6 +191,22 @@ class Grid {
     })
   }
 
+  updateFlagCount() {
+    let flagsPlaced = 0
+
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        if (this.cells[x][y].isFlagged) {
+          flagsPlaced++
+        }
+      }
+    }
+
+    let flagsRemaining = this.startingMines - flagsPlaced
+
+    MINESDISPLAY.innerHTML = `: ${flagsRemaining}`
+  }
+
   checkWin() {
     //checks for a win!
     //loops through all cells and confirms all non-mine cells are revealed
@@ -234,6 +256,7 @@ let g = new Grid(10, 8, 10) //easy
 //reset stuff
 const gameReset = function () {
   GRIDCONTAINER.innerHTML = ''
+
   switch (DIFFICULTYSELECT.value) {
     case 'easy':
       g = new Grid(10, 8, 10)
@@ -250,6 +273,7 @@ const gameReset = function () {
     default:
       g = new Grid(10, 8, 10)
   }
+
   console.log('Reset')
 }
 
