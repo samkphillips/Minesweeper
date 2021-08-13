@@ -53,14 +53,6 @@ class Cell {
   reveal() {
     //if not a mine, reveal number
     //if it is a mine, game over
-
-    // if minesNearby === 0, we need to flood-reveal.
-    // I guess that might need to live in the parent Grid,
-    // so that this can just call it and not have to worry
-    // about excessively recurring or anything??
-    // Buncha different ways I could write that.
-
-    //crude game logic just to check
     if (this.isMine) {
       this.parent.lose()
       this.cellElement.className = 'cell killer-mine'
@@ -174,9 +166,7 @@ class Grid {
     //loops through all cells, updates count of neighbors as needed
     this.cells.forEach((r) => {
       r.forEach((c) => {
-        if (c.isMine) {
-          //c.cellElement.innerHTML = `<p>MINE</p>`
-        } else {
+        if (!c.isMine) {
           let neighbors = this.getNeighbors(c.location.x, c.location.y)
           let mineCount = 0
           neighbors.forEach((nC) => {
@@ -184,7 +174,6 @@ class Grid {
               mineCount++
             }
           })
-          //c.cellElement.innerHTML = `<p>${mineCount}</p>`
           c.minesNearby = mineCount
         }
       })
@@ -225,7 +214,7 @@ class Grid {
 
   win() {
     //display a win, end game, etc.
-    console.log('You won!')
+    MINESDISPLAY.innerHTML = ' You Win!'
     gameActive = false
   }
 
@@ -242,16 +231,12 @@ class Grid {
       }
     }
 
-    console.log('You lost!')
     gameActive = false
   }
 }
 
 //make the grid! Gets the ball rolling.
 let g = new Grid(10, 8, 10) //easy
-//let g = new Grid(18, 14, 40) //medium
-//let g = new Grid(24, 20, 99) //hard
-//let g = new Grid(200, 180, 8000) //hahahaha, stress test
 
 //reset stuff
 const gameReset = function () {
@@ -273,8 +258,6 @@ const gameReset = function () {
     default:
       g = new Grid(10, 8, 10)
   }
-
-  console.log('Reset')
 }
 
 RESETBUTTON.addEventListener('click', gameReset)
