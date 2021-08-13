@@ -14,8 +14,7 @@ class Cell {
 
     this.cellElement = document.createElement('div')
     this.cellElement.className = 'cell'
-
-    this.cellElement.innerHTML = `<p> </p>`
+    this.cellElement.innerHTML = '<p> </p>'
 
     this.isMine = false
     this.isRevealed = false
@@ -66,8 +65,7 @@ class Cell {
       this.cellElement.innerHTML = `<p>MINE</p>`
     } else {
       this.isRevealed = true
-      this.cellElement.style.backgroundColor = 'white'
-      this.cellElement.innerHTML = `<p>${this.minesNearby}</p>`
+      this.cellElement.className = `cell reveal-${this.minesNearby}`
 
       if (this.parent.checkWin()) {
         this.parent.win()
@@ -78,15 +76,13 @@ class Cell {
   markFlag() {
     //marks cell with flag
     this.isFlagged = true
-    this.cellElement.className = 'cell b'
-    this.cellElement.innerHTML = `<p>flag</p>`
+    this.cellElement.className = 'cell flagged'
   }
 
   unMarkFlag() {
     //removes flag
     this.isFlagged = false
     this.cellElement.className = 'cell'
-    this.cellElement.innerHTML = `<p> </p>`
   }
 }
 
@@ -220,8 +216,8 @@ class Grid {
 
 //make the grid! Gets the ball rolling.
 //let g = new Grid(8, 10, 10) //easy
-let g = new Grid(18, 14, 40) //medium
-//let g = new Grid(24, 20, 99) //hard
+//let g = new Grid(18, 14, 40) //medium
+let g = new Grid(24, 20, 99) //hard
 //let g = new Grid(200, 180, 8000) //hahahaha
 
 //reset stuff

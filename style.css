@@ -14,9 +14,17 @@ body {
   align-items: center;
 }
 
+.delete-me {
+  color: white;
+}
+
 .game {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  padding: 50px;
+}
+
+.hud {
   background-color: darkblue;
 }
 
@@ -31,8 +39,50 @@ body {
 .cell {
   width: 30px;
   height: 30px;
-  background-color: gray;
+  background-image: url('./assets/minesweeper_tile.png');
+  background-repeat: no-repeat;
+  background-position: center;
   text-align: center;
+}
+
+.flagged {
+  background-image: url('./assets/minesweeper_flagged.png');
+}
+
+.reveal-0 {
+  background-image: url('./assets/minesweeper_empty.png');
+}
+
+.reveal-1 {
+  background-image: url('./assets/minesweeper_1.png');
+}
+
+.reveal-2 {
+  background-image: url('./assets/minesweeper_2.png');
+}
+
+.reveal-3 {
+  background-image: url('./assets/minesweeper_3.png');
+}
+
+.reveal-4 {
+  background-image: url('./assets/minesweeper_4.png');
+}
+
+.reveal-5 {
+  background-image: url('./assets/minesweeper_5.png');
+}
+
+.reveal-6 {
+  background-image: url('./assets/minesweeper_6.png');
+}
+
+.reveal-7 {
+  background-image: url('./assets/minesweeper_7.png');
+}
+
+.reveal-8 {
+  background-image: url('./assets/minesweeper_8.png');
 }
 
 .a {
