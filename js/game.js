@@ -2,8 +2,9 @@
 const BODY = document.querySelector('body')
 const GRIDCONTAINER = document.querySelector('.grid-container')
 const RESETBUTTON = document.querySelector('.reset-button')
+const DIFFICULTYSELECT = document.querySelector('.difficulty-select')
 
-const sizeOfCells = 30 //size in pixels of whatever image I use for the cell sprites
+const sizeOfCells = 30 //size in pixels of image used for the cell sprites
 
 let gameActive = false
 
@@ -14,7 +15,6 @@ class Cell {
 
     this.cellElement = document.createElement('div')
     this.cellElement.className = 'cell'
-    // this.cellElement.innerHTML = '<p> </p>'
 
     this.isMine = false
     this.isRevealed = false
@@ -226,15 +226,30 @@ class Grid {
 }
 
 //make the grid! Gets the ball rolling.
-//let g = new Grid(8, 10, 10) //easy
+let g = new Grid(10, 8, 10) //easy
 //let g = new Grid(18, 14, 40) //medium
-let g = new Grid(24, 20, 99) //hard
-//let g = new Grid(200, 180, 8000) //hahahaha
+//let g = new Grid(24, 20, 99) //hard
+//let g = new Grid(200, 180, 8000) //hahahaha, stress test
 
 //reset stuff
 const gameReset = function () {
   GRIDCONTAINER.innerHTML = ''
-  g = new Grid(18, 14, 40)
+  switch (DIFFICULTYSELECT.value) {
+    case 'easy':
+      g = new Grid(10, 8, 10)
+      break
+    case 'medium':
+      g = new Grid(18, 14, 40)
+      break
+    case 'hard':
+      g = new Grid(24, 20, 99)
+      break
+    case 'stress-test':
+      g = new Grid(200, 180, 8000)
+      break
+    default:
+      g = new Grid(10, 8, 10)
+  }
   console.log('Reset')
 }
 

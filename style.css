@@ -4,14 +4,23 @@
 }
 
 body {
-  background-color: cornflowerblue;
+  background: rgb(11, 49, 66);
+  background: linear-gradient(
+    330deg,
+    rgba(11, 49, 66, 1) 0%,
+    rgba(146, 134, 155, 1) 80%,
+    rgba(185, 230, 255, 1) 105%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(50px, auto) 1fr minmax(50px, auto);
-  grid-template-rows: minmax(50px, 1fr) 1fr minmax(50px, 1fr);
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
   justify-items: center;
   align-items: center;
+  font-family: Arial;
 }
 
 .delete-me {
@@ -25,11 +34,16 @@ body {
 }
 
 .hud {
-  background-color: darkblue;
+  background-color: #92869b;
+  padding: 0;
+  width: calc(100% - 4px);
+  height: 56px;
+  border: solid 2px;
+  border-color: #b9e6ff #0b3142 #0b3142 #b9e6ff;
 }
 
 .grid-container {
-  background-color: green;
+  background-color: #0b3142;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
@@ -95,12 +109,4 @@ body {
 
 .reveal-8 {
   background-image: url('./assets/minesweeper_8.png');
-}
-
-.a {
-  background-color: blue;
-}
-
-.b {
-  background-color: red;
 }
