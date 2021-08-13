@@ -60,6 +60,10 @@ class Cell {
       this.isRevealed = true
       this.cellElement.className = `cell reveal-${this.minesNearby}`
 
+      if (this.minesNearby === 0) {
+        this.parent.floodReveal(this)
+      }
+
       if (this.parent.checkWin()) {
         this.parent.win()
       }
@@ -194,6 +198,29 @@ class Grid {
     let flagsRemaining = this.startingMines - flagsPlaced
 
     MINESDISPLAY.innerHTML = `: ${flagsRemaining}`
+  }
+
+  floodReveal(initialCell) {
+    let toFlood = [initialCell]
+
+    while (toFlood.length > 0) {
+      let c = toFlood.shift()
+
+      console.log(c)
+
+      let cNeighbors = this.getNeighbors(c.location.x, c.location.y)
+
+      cNeighbors.forEach((neighbor) => {
+        if (!neighbor.isRevealed) {
+          neighbor.isRevealed = true
+          neighbor.cellElement.className = `cell reveal-${neighbor.minesNearby}`
+
+          if (neighbor.minesNearby === 0) {
+            toFlood.push(neighbor)
+          }
+        }
+      })
+    }
   }
 
   checkWin() {
